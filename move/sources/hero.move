@@ -56,7 +56,7 @@ module challenge::hero {
     }
 
     #[test_only]
-    public fun hero_id(hero: &Hero): UID {
+    public fun hero_id(hero: &Hero): ID {
         object::id(hero)
     }
 }
