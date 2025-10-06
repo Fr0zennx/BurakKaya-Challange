@@ -1,15 +1,24 @@
 import { Transaction } from "@mysten/sui/transactions";
 
-export const battle = (packageId: string, heroId: string, arenaId: string) => {
+export const battle = (
+  packageId: string,
+  heroId: string,
+  arenaId: string
+) => {
   const tx = new Transaction();
-  
-  // TODO: Add moveCall to start a battle
-  // Function: `${packageId}::arena::battle`
-  // Arguments: heroId (object), arenaId (object)
-    // Hints:
-    // Use tx.object() for both hero and battle place objects
-    // The battle winner is determined by hero power comparison
-    // Winner takes both heroes
-  
+
+  // ✅ Move call: challenge::arena::battle
+  tx.moveCall({
+    target: `${packageId}::arena::battle`,
+    arguments: [
+      tx.object(heroId),   // Hero object (kullanıcının kahramanı)
+      tx.object(arenaId),  // Arena object (rakip kahramanın bulunduğu alan)
+    ],
+  });
+
+  // ✅ Battle sonucu Move modülündeki güç karşılaştırmasına göre belirlenir
+  // Hero vs Arena.warrior — kazanan her iki kahramanı da alır.
+
   return tx;
 };
+
