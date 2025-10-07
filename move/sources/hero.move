@@ -31,7 +31,7 @@ module challenge::hero {
             power,
         };
 
-        transfer::transfer(hero, tx_context::sender(ctx));
+        transfer::public_transfer(hero, ctx.sender());
 
         let metadata = HeroMetadata {
             id: object::new(ctx),
